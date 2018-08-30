@@ -67,8 +67,8 @@ DOWNLOAD_DELAY = 2
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'house_members.pipelines.PoliticiansPipeline': 100,
-    'house_members.pipelines.HouseMembersPipeline': 200,
+#     'house_members.pipelines.PoliticiansPipeline': 100,
+#     'house_members.pipelines.HouseMembersPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
