@@ -11,6 +11,7 @@ import datetime
 from datetime import date
 import time
 from google.cloud import pubsub
+import subprocess
 
 # set today's date
 date_today = date.today()
@@ -49,7 +50,8 @@ class PoliticiansPipeline(object):
 #              self.conn.commit()
 #              return item
 
-            example_git_command = "export GOOGLE_APPLICATION_CREDENTIALS='/path/to/keyfile.json'"
+            api_creds = "GOOGLE_APPLICATION_CREDENTIALS='/path/to/keyfile.json'" #find correct pathway
+            subprocess.run(["export", api_creds])
 
             publisher = pubsub.PublisherClient()
             topic = 'projects/{project_id}/topics/{topic}'.format(
