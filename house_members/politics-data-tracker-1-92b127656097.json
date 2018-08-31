@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "politics-data-tracker-1",
+  "private_key_id": "92b127656097d78365effa3f01636c7b6e04ce61",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCSywkCVz6g/2OH\n61EZVI8RqjjCbSF8flkLKKTveYPZbJ6f4GsGc6m/mberCq3FUU+HS/+XZuY+0URP\n44bzw5ewDQ4VjBttWYwzr/4G1IQSovSYGfWdD9syiOubAzorq3+Mo3wRxGP/I7LM\nkf/ip3kPokl0amTSN9Psorb+0OenHFUKMasNoXu4UPvgxU6o63IYUZJwixgCtm+u\n0dRqp0oBk7JERTzMbsBp1vO4EpaY2cM40a2qLqxI+52YsIWV2EInT9DsLJxi3KX7\n7tRPUuUR7aCEUQcFLlPmLtoSWxcjbrHx75wt58NRaW6MlbhjZLyIGU21LEczqMqT\nnhtWLZFXAgMBAAECggEADow+rVO2KkCFPbAtjmQZ9bc3/tTP78WZz4hMqEsTrRWd\nttyH3tDRruJuGG5rgFWpmxAGGZwiD3Gv4nb7JedpfhIdJjeHdFPemDTF6SlgmXQ6\n52QTOmia4aw+JVOxjShm8Ko3Ho+nFV8VVj7V7EGKtujvfLEaotbTku0hU6mie6Yl\nsXeSWNpBdPOtoGMzuUmc/sLDh2hvs/YuwncUjhstYCkXa3AG33Ut9CNhRwa04o8h\n5xz+Oi97Uuo2/25bIES6bnK8EJUdENeNVQ2OA3fDYdHiZClK4ghm+a1DEEC/Mxsm\nB782VZ0KVJ9SSsYiF0R6ax8YAMOubcdvXtiZR7YtyQKBgQDMPfjaE+dp2E23tDYf\noDWMRq9Zms1mBRlYPJy5G8BOPMAD3p6VWTOqCVlLvG8Jdj6q7NdTRHIskBaAH53c\nTRTZFIVMKJW+5oVzGsYYuGmwB+OTsd1M0z810nEcVjcAk9ATrryCqYSphrpXgpSh\nHeWpxbTLKqeie2JbCEoBzmqunQKBgQC3/hxdtaIsE+q6OB1ZWKuPU+jXl21nFix0\nZoHs8usaYYWyFMsZxhQ1RAUl+fvsT9BntUx6/IyhDTjBzslT2PLq0gabLboJg5GQ\nvfdNx1JA/5Vzz76xWnD9R+C2YioFnk7CGERmTeahbouoyq/mxnqhu6wA80ukTrox\nBWXU23XjgwKBgQCusr9+AZJqpbrsTDgTWx0SbI+mTFQuVGQ2ZjoD16npAeuYI75v\nrsoTQkXgE0DCziKSX11a+uvSFDk6xFBp1IDlobjWyMw1asZxC1CwamT0TfsqJPRO\nt06VAfkALPqFAunzO/5AoTE5NGWFXss0+Pat/c9EDKswvusFRJTQ8LetvQKBgQCb\nwVLUBWmmtKmVQOGffA+ngpnuv/LOPJgfZZOBOdbKe1oJec7BH8yFlvJgxrF7x8kd\nsf1vc5G82It+jYYjI9nn7SnIfboqSaWViSrsPdqkyXgEFQ5R5sUVtJ5G5uy52tzD\nNHXawQGHESTLG+IykzzG4y9lkpArJLY7v10IB0xR7wKBgFrhLknJfP/A3KTBTWlq\ndTmy892AVXGsaMmRffhBjsk4K0qEI5PRkrsTW3y7XNTvSd+Jy7dgb8aFMwdL+pOq\n5g8vfyjBupayX12km+3OypPw/qfNtVa1AFWC/NssYT/08wzBaieiomN0WlHJDpfR\no1yTRpkJVD12W13L+I/lc7k+\n-----END PRIVATE KEY-----\n",
+  "client_email": "scrapinghub@politics-data-tracker-1.iam.gserviceaccount.com",
+  "client_id": "102400486103225457864",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scrapinghub%40politics-data-tracker-1.iam.gserviceaccount.com"
+}
