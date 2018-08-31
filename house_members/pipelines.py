@@ -10,6 +10,7 @@
 import datetime
 from datetime import date
 import time
+from google.cloud import pubsub
 
 # set today's date
 date_today = date.today()
@@ -31,7 +32,7 @@ class PoliticiansPipeline(object):
 #          self.cur.close()
 #          self.conn.close()
             
-#      def process_item(self, item, spider):
+     def process_item(self, item, spider):
 #          select_query = """select first_name, last_name, party, state from politicians"""
 #          self.cur.execute(select_query)
 #          politicians_list = list(self.cur)
@@ -47,6 +48,18 @@ class PoliticiansPipeline(object):
 #              self.cur.execute(insert_query, vars = pol_packet)
 #              self.conn.commit()
 #              return item
+
+            example_git_command = "export GOOGLE_APPLICATION_CREDENTIALS='/path/to/keyfile.json'"
+
+            publisher = pubsub.PublisherClient()
+            topic = 'projects/{project_id}/topics/{topic}'.format(
+                 project_id='politics-data-tracker-1',
+                 topic='house_members')
+            publisher.publish(topic, b'This is a representative in the House.', 
+                              first_name = item['first_name'],
+                              last_name = item['last_name'],
+                              party = item['party'],
+                              state = item['state'])
 
 class HouseMembersPipeline(object):
 #     def open_spider(self, spider):
