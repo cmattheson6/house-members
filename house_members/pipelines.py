@@ -50,7 +50,8 @@ class PoliticiansPipeline(object):
 #              self.conn.commit()
 #              return item
 
-            api_creds = "GOOGLE_APPLICATION_CREDENTIALS='/path/to/keyfile.json'" #find correct pathway
+            api_creds = "GOOGLE_APPLICATION_CREDENTIALS=\
+                        'https://github.com/cmattheson6/house-members/blob/master/house_members/politics-data-tracker-1-92b127656097.json'" #find correct pathway
             subprocess.run(["export", api_creds])
 
             publisher = pubsub.PublisherClient()
