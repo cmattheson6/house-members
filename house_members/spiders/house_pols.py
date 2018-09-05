@@ -43,7 +43,7 @@ class HousePolsSpider(scrapy.Spider):
             # pulls the state of all representatives in this group; will be pulled into dictionary
             # also maps from full state to state initial
             state = region.xpath(".//caption/text()").extract_first()
-            state = state_raw.strip(' \t\n\r')
+            state = state.strip(' \t\n\r')
 #             state = initials_list[state_list.index(state_processed)]
             
             # establishes the path to each representative of the one state
@@ -55,20 +55,20 @@ class HousePolsSpider(scrapy.Spider):
                     first_name = full_name.split(',')[1]
                 else:
                     full_name = full_name.replace(" ", ",", 1)
-                    first_name = full_name_revised.split(',')[1]
-                first_name = first_name_raw.strip(' \t\n\r')
+                    first_name = full_name.split(',')[1]
+                first_name = first_name.strip(' \t\n\r')
                 
                 # pulls the last name of the representative
                 last_name = full_name.split(',')[0]
-                last_name = last_name_raw.strip(' \t\n\r')
+                last_name = last_name.strip(' \t\n\r')
                 
                 # pulls the party of the given representative
                 party = rep.xpath(".//td/text()").extract()[2]
-                party = party_raw.strip(' \t\n\r')
+                party = party.strip(' \t\n\r')
                 
                 # pulls the district of the given representative
                 district = rep.xpath(".//td/text()").extract()[0]
-                district = district_raw.strip(' \t\n\r')
+                district = district.strip(' \t\n\r')
                 
                 # combines all data pieces of a representative into a dictionary
                 rep_dict = {
