@@ -1,4 +1,4 @@
 projects:
-  default: house-members
+  default: House_pols
 requirements:
   file: requirements.txt
