@@ -1,0 +1,4 @@
+projects:
+  default: house-members
+requirements:
+  file: requirements.txt
