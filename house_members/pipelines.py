@@ -18,24 +18,25 @@ date_today = date.today()
 
 class PoliticiansPipeline(object):
      def open_spider(self, spider):
-            settings = crawler.settings
-            credentials = {
-                        'auth_provider_x509_cert_url': settings.get('auth_provider_x509_cert_url'),
-                        'auth_uri': settings.get('auth_uri'),
-                        'client_email': settings.get('client_email'),
-                        'client_id': settings.get('client_id'),
-                        'client_x509_cert_url': settings.get('client_x509_cert_url'),
-                        'private_key': settings.get('private_key'),
-                        'private_key_id': settings.get('private_key_id'),
-                        'project_id': settings.get('project_id'),
-                        'token_uri': settings.get('token_uri'),
-                        'type': settings.get('account_type')
-            }
-            print(self.CREDENTIALS)
-            publisher = pubsub.PublisherClient.from_service_account_json(self.credentials)
-            topic = 'projects/{project_id}/topics/{topic}'.format(
-                 project_id='politics-data-tracker-1',
-                 topic='house_members')
+#             settings = crawler.settings
+#             credentials = {
+#                         'auth_provider_x509_cert_url': settings.get('auth_provider_x509_cert_url'),
+#                         'auth_uri': settings.get('auth_uri'),
+#                         'client_email': settings.get('client_email'),
+#                         'client_id': settings.get('client_id'),
+#                         'client_x509_cert_url': settings.get('client_x509_cert_url'),
+#                         'private_key': settings.get('private_key'),
+#                         'private_key_id': settings.get('private_key_id'),
+#                         'project_id': settings.get('project_id'),
+#                         'token_uri': settings.get('token_uri'),
+#                         'type': settings.get('account_type')
+#             }
+#             print(self.CREDENTIALS)
+#             publisher = pubsub.PublisherClient.from_service_account_json(self.credentials)
+#             topic = 'projects/{project_id}/topics/{topic}'.format(
+#                  project_id='politics-data-tracker-1',
+#                  topic='house_members')
+            pass
 #          hostname = 'localhost'
 #          username = 'postgres'
 #          password = 'postgres'
@@ -67,13 +68,13 @@ class PoliticiansPipeline(object):
 #              self.cur.execute(insert_query, vars = pol_packet)
 #              self.conn.commit()
 #              return item
+     pass
 
-
-            publisher.publish(topic, b'This is a representative in the House.', 
-                              first_name = item['first_name'],
-                              last_name = item['last_name'],
-                              party = item['party'],
-                              state = item['state'])
+#             publisher.publish(topic, b'This is a representative in the House.', 
+#                               first_name = item['first_name'],
+#                               last_name = item['last_name'],
+#                               party = item['party'],
+#                               state = item['state'])
 
 class HouseMembersPipeline(object):
 #     def open_spider(self, spider):
