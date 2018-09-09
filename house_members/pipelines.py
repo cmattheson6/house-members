@@ -68,7 +68,7 @@ class PoliticiansPipeline(object):
 #              self.cur.execute(insert_query, vars = pol_packet)
 #              self.conn.commit()
 #              return item
-     pass
+          pass
 
 #             publisher.publish(topic, b'This is a representative in the House.', 
 #                               first_name = item['first_name'],
