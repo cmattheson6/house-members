@@ -14,13 +14,14 @@ from google.cloud import pubsub
 import subprocess
 import scrapy
 import scrapy.crawler
+from scrapy.utils.project import get_project_settings
 
 # set today's date
 date_today = date.today()
 
 class PoliticiansPipeline(object):
      def open_spider(self, spider):
-            settings = crawler.settings
+            settings = get_project_settings()
             credentials = {
                         'auth_provider_x509_cert_url': settings.get('auth_provider_x509_cert_url'),
                         'auth_uri': settings.get('auth_uri'),
