@@ -12,6 +12,8 @@ from datetime import date
 import time
 from google.cloud import pubsub
 import subprocess
+import scrapy
+import scrapy.crawler
 
 # set today's date
 date_today = date.today()
