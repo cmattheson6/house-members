@@ -34,6 +34,7 @@ class PoliticiansPipeline(object):
                         'token_uri': settings.get('token_uri'),
                         'type': settings.get('account_type')
             }
+            print(settings) 
             print(credentials)
 #             publisher = pubsub.PublisherClient.from_service_account_json(self.credentials)
 #             topic = 'projects/{project_id}/topics/{topic}'.format(
