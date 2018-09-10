@@ -21,18 +21,18 @@ date_today = date.today()
 
 class PoliticiansPipeline(object):
      def open_spider(self, spider):
-            settings = get_project_settings()
+#             settings = get_project_settings()
             credentials = {
-                        'auth_provider_x509_cert_url': settings.get('auth_provider_x509_cert_url'),
-                        'auth_uri': settings.get('auth_uri'),
-                        'client_email': settings.get('client_email'),
-                        'client_id': settings.get('client_id'),
-                        'client_x509_cert_url': settings.get('client_x509_cert_url'),
-                        'private_key': settings.get('private_key'),
-                        'private_key_id': settings.get('private_key_id'),
-                        'project_id': settings.get('project_id'),
-                        'token_uri': settings.get('token_uri'),
-                        'type': settings.get('account_type')
+                        'auth_provider_x509_cert_url': spider.settings.get('auth_provider_x509_cert_url'),
+                        'auth_uri': spider.settings.get('auth_uri'),
+                        'client_email': spider.settings.get('client_email'),
+                        'client_id': spider.settings.get('client_id'),
+                        'client_x509_cert_url': spider.settings.get('client_x509_cert_url'),
+                        'private_key': spider.settings.get('private_key'),
+                        'private_key_id': spider.settings.get('private_key_id'),
+                        'project_id': spider.settings.get('project_id'),
+                        'token_uri': spider.settings.get('token_uri'),
+                        'type': spider.settings.get('account_type')
             }
             print(settings) 
             print(credentials)
