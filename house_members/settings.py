@@ -91,3 +91,14 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+account_type = "a"
+auth_provider_x509_cert_url = 'b'
+auth_uri = 'c'
+client_email = 'd'
+client_id = 'e'
+client_x509_cert_url = 'f'
+private_key = 'g'
+private_key_id = 'h'
+project_id = 'i'
+token_uri = 'j'
