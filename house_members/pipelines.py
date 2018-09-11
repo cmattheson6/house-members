@@ -21,7 +21,6 @@ date_today = date.today()
 
 class PoliticiansPipeline(object):
      def open_spider(self, spider):
-#             settings = get_project_settings()
             credentials = {
                         'auth_provider_x509_cert_url': spider.settings.get('auth_provider_x509_cert_url'),
                         'auth_uri': spider.settings.get('auth_uri'),
@@ -34,13 +33,12 @@ class PoliticiansPipeline(object):
                         'token_uri': spider.settings.get('token_uri'),
                         'type': spider.settings.get('account_type')
             }
-#             print(settings) 
             print(credentials)
-#             publisher = pubsub.PublisherClient.from_service_account_json(self.credentials)
-#             topic = 'projects/{project_id}/topics/{topic}'.format(
-#                  project_id='politics-data-tracker-1',
-#                  topic='house_members')
-#             pass
+            publisher = pubsub.PublisherClient.from_service_account_json(credentials)
+            topic = 'projects/{project_id}/topics/{topic}'.format(
+                 project_id='politics-data-tracker-1',
+                 topic='house_members')
+
 #          hostname = 'localhost'
 #          username = 'postgres'
 #          password = 'postgres'
@@ -72,13 +70,13 @@ class PoliticiansPipeline(object):
 #              self.cur.execute(insert_query, vars = pol_packet)
 #              self.conn.commit()
 #              return item
-          pass
+#           pass
 
-#             publisher.publish(topic, b'This is a representative in the House.', 
-#                               first_name = item['first_name'],
-#                               last_name = item['last_name'],
-#                               party = item['party'],
-#                               state = item['state'])
+            publisher.publish(topic, b'This is a representative in the House.', 
+                              first_name = item['first_name'],
+                              last_name = item['last_name'],
+                              party = item['party'],
+                              state = item['state'])
 
 class HouseMembersPipeline(object):
 #     def open_spider(self, spider):
