@@ -15,6 +15,7 @@ import subprocess
 import scrapy
 import scrapy.crawler
 from scrapy.utils.project import get_project_settings
+import json
 
 # set today's date
 date_today = date.today()
@@ -34,6 +35,7 @@ class PoliticiansPipeline(object):
                         'type': spider.settings.get('account_type')
             }
             print(credentials)
+            credentials = json.dumps(credentials)
             publisher = pubsub.PublisherClient.from_service_account_json(credentials)
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
