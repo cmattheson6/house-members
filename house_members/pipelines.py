@@ -35,8 +35,9 @@ class PoliticiansPipeline(object):
                         'type': spider.settings.get('account_type')
             }
             print(credentials)
-            credentials = json.dumps(credentials)
-            publisher = pubsub.PublisherClient.from_service_account_json(credentials = credentials)
+            credentials_json = json.dumps(credentials)
+            publisher = pubsub.PublisherClient.from_service_account_json(credentials = credentials_json,
+                                                                         kwargs = credentials)
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
                  topic='house_members')
