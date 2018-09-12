@@ -37,9 +37,6 @@ class PoliticiansPipeline(object):
             print(credentials)
             credentials_json = json.dumps(credentials)
             publisher = pubsub.PublisherClient.from_service_account_info(credentials)
-            topic = 'projects/{project_id}/topics/{topic}'.format(
-                 project_id='politics-data-tracker-1',
-                 topic='house_members')
 
 #          hostname = 'localhost'
 #          username = 'postgres'
@@ -74,6 +71,9 @@ class PoliticiansPipeline(object):
 #              return item
 #           pass
 
+            topic = 'projects/{project_id}/topics/{topic}'.format(
+                 project_id='politics-data-tracker-1',
+                 topic='house_members')
             publisher.publish(topic, b'This is a representative in the House.', 
                               first_name = item['first_name'],
                               last_name = item['last_name'],
