@@ -56,7 +56,7 @@ class PoliticiansPipeline(object):
 #              self.conn.commit()
 #              return item
 #           pass
-            credentials = {
+            cred_dict = {
                         'auth_provider_x509_cert_url': spider.settings.get('auth_provider_x509_cert_url'),
                         'auth_uri': spider.settings.get('auth_uri'),
                         'client_email': spider.settings.get('client_email'),
@@ -69,8 +69,9 @@ class PoliticiansPipeline(object):
                         'type': spider.settings.get('account_type')
             }
             print(credentials)
-            credentials_json = json.dumps(credentials)
-            publisher = pubsub.PublisherClient.from_service_account_info(credentials)
+            cred_json = json.dumps(cred_dict)
+            credentials = service_account.Credentials.from_service_account_info(cred_dict)
+            publisher = pubsub.PublisherClient(credentials = credentials)
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
