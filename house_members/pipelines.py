@@ -68,7 +68,7 @@ class PoliticiansPipeline(object):
                         'token_uri': spider.settings.get('token_uri'),
                         'type': spider.settings.get('account_type')
             }
-            print(credentials)
+            print(cred_dict)
             cred_json = json.dumps(cred_dict)
             credentials = service_account.Credentials.from_service_account_info(cred_dict)
             publisher = pubsub.PublisherClient(credentials = credentials)
