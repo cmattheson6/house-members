@@ -70,7 +70,7 @@ class PoliticiansPipeline(object):
             }
             print(credentials)
             credentials_json = json.dumps(credentials)
-            publisher = pubsub.PublisherClient.from_service_account_json(credentials_json)
+            publisher = pubsub.PublisherClient.from_service_account_info(credentials)
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
