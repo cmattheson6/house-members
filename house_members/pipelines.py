@@ -71,7 +71,8 @@ class PoliticiansPipeline(object):
             }
             print(cred_dict)
             cred_json = json.dumps(cred_dict)
-            credentials = service_account.Credentials.from_service_account_info(cred_dict)
+            scope = r'https://www.googleapis.com/auth/pubsub'
+            credentials = service_account.Credentials.from_service_account_info(cred_dict, scopes = (scope,))
             publisher = pubsub.PublisherClient(credentials = credentials)
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
