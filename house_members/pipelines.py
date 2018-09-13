@@ -11,6 +11,7 @@ import datetime
 from datetime import date
 import time
 from google.cloud import pubsub
+import google.cloud
 import subprocess
 import scrapy
 import scrapy.crawler
