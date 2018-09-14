@@ -17,6 +17,7 @@ import scrapy
 import scrapy.crawler
 from scrapy.utils.project import get_project_settings
 import json
+import os
 
 # set today's date
 date_today = date.today()
@@ -73,8 +74,9 @@ class PoliticiansPipeline(object):
                  }
             print(cred_dict)
             cred_json = json.dumps(cred_dict)
-            credentials = service_account.Credentials.from_service_account_info(cred_dict)
-            publisher = pubsub.PublisherClient(credentials = credentials)
+            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = cred_json
+#             credentials = service_account.Credentials.from_service_account_info(cred_dict)
+            publisher = pubsub.PublisherClient()
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
