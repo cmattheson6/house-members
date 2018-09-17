@@ -74,6 +74,15 @@ class PoliticiansPipeline(object):
                  }
             print(cred_dict)
             cred_json = json.dumps(cred_dict)
+               
+               
+            # Create a temporary file here
+            # Then use a 'with open' statement as shown in the stackoverflow comments
+            # Add in the json dump phrase with the right file location
+            # figure out how to properly add the file to either the application credentials or explicit in the call
+            # make sure to delete the temporary file in the 'close_spider' fxn
+               
+               
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = cred_json
 #             credentials = service_account.Credentials.from_service_account_info(cred_dict)
             publisher = pubsub.PublisherClient()
