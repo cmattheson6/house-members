@@ -18,6 +18,7 @@ import scrapy.crawler
 from scrapy.utils.project import get_project_settings
 import json
 import os
+import tempfile
 
 # set today's date
 date_today = date.today()
