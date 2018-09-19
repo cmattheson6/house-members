@@ -90,7 +90,6 @@ class PoliticiansPipeline(object):
             # # make sure to delete the temporary file
 
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
-            os.remove(path)
 
             publisher = pubsub.PublisherClient()
           
@@ -102,6 +101,7 @@ class PoliticiansPipeline(object):
                               last_name = item['last_name'],
                               party = item['party'],
                               state = item['state'])
+            os.remove(path)
 
 # class HouseMembersPipeline(object):
 # #     def open_spider(self, spider):
