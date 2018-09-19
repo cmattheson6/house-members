@@ -77,14 +77,20 @@ class PoliticiansPipeline(object):
                
                
             # Create a temporary file here
+            fd, path = tempfile.mkstemp()
+            print(path)
+
             # Then use a 'with open' statement as shown in the stackoverflow comments
-            # Add in the json dump phrase with the right file location
-            # figure out how to properly add the file to either the application credentials or explicit in the call
-            # make sure to delete the temporary file in the 'close_spider' fxn
-               
-               
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = cred_json
-#             credentials = service_account.Credentials.from_service_account_info(cred_dict)
+            with os.fdopen(fd, 'w') as tmp:
+                json.dump(cred_dict, tmp)
+                tmp.close()
+            # # Add in the json dump phrase with the right file location
+            # # figure out how to properly add the file to either the application credentials or explicit in the call
+            # # make sure to delete the temporary file
+
+            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
+            os.remove(path)
+
             publisher = pubsub.PublisherClient()
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
