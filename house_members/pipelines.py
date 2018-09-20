@@ -59,19 +59,19 @@ class PoliticiansPipeline(object):
 #              self.conn.commit()
 #              return item
 #           pass
-            def doubleQString(x):
-                 return "{0}".format(x);
+#             def doubleQString(x):
+#                  return "{0}".format(x);
             cred_dict = {
-                             "auth_provider_x509_cert_url": doubleQString(spider.settings.get('auth_provider_x509_cert_url')),
-                             "auth_uri": doubleQString(spider.settings.get('auth_uri')),
-                             "client_email": doubleQString(spider.settings.get('client_email')),
-                             "client_id": doubleQString(spider.settings.get('client_id')),
-                             "client_x509_cert_url": doubleQString(spider.settings.get('client_x509_cert_url')),
-                             "private_key": doubleQString(spider.settings.get('private_key')),
-                             "private_key_id": doubleQString(spider.settings.get('private_key_id')),
-                             "project_id": doubleQString(spider.settings.get('project_id')),
-                             "token_uri": doubleQString(spider.settings.get('token_uri')),
-                             "type": doubleQString(spider.settings.get('account_type'))
+                             "auth_provider_x509_cert_url": spider.settings.get('auth_provider_x509_cert_url'),
+                             "auth_uri": spider.settings.get('auth_uri'),
+                             "client_email": spider.settings.get('client_email'),
+                             "client_id": spider.settings.get('client_id'),
+                             "client_x509_cert_url": spider.settings.get('client_x509_cert_url'),
+                             "private_key": spider.settings.get('private_key'),
+                             "private_key_id": spider.settings.get('private_key_id'),
+                             "project_id": spider.settings.get('project_id'),
+                             "token_uri": spider.settings.get('token_uri'),
+                             "type": spider.settings.get('account_type')
                  }
             print(cred_dict)
             cred_json = json.dumps(cred_dict)
