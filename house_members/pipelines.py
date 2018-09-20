@@ -84,6 +84,7 @@ class PoliticiansPipeline(object):
             # Then use a 'with open' statement as shown in the stackoverflow comments
             with os.fdopen(fd, 'w') as tmp:
                 json.dump(cred_dict, tmp)
+                json.load(tmp)
                 tmp.close()
             # # Add in the json dump phrase with the right file location
             # # figure out how to properly add the file to either the application credentials or explicit in the call
