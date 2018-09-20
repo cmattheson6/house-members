@@ -78,7 +78,7 @@ class PoliticiansPipeline(object):
                
                
             # Create a temporary file here
-            fd, path = tempfile.mkstemp()
+            fd, path = tempfile.mkstemp(suffix='.json')
             print(path)
 
             # Then use a 'with open' statement as shown in the stackoverflow comments
@@ -95,7 +95,7 @@ class PoliticiansPipeline(object):
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
-                 topic='house_members')
+                 topic='house_pols')
             publisher.publish(topic, b'This is a representative in the House.', 
                               first_name = item['first_name'],
                               last_name = item['last_name'],
