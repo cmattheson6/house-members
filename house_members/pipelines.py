@@ -92,10 +92,12 @@ class PoliticiansPipeline(object):
 
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
 
+            print(os.path.exists(path))
             credentials, project_id = google.auth.default()
             print(project_id)
             print(credentials)
-               
+             
+            print(os.path.exists(path))
             publisher = pubsub.PublisherClient()
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
