@@ -19,6 +19,7 @@ from scrapy.utils.project import get_project_settings
 import json
 import os
 import tempfile
+import google.auth
 
 # set today's date
 date_today = date.today()
@@ -84,7 +85,6 @@ class PoliticiansPipeline(object):
             # Then use a 'with open' statement as shown in the stackoverflow comments
             with os.fdopen(fd, 'w') as tmp:
                 json.dump(cred_dict, tmp)
-                json.load(tmp)
                 tmp.close()
             # # Add in the json dump phrase with the right file location
             # # figure out how to properly add the file to either the application credentials or explicit in the call
@@ -92,6 +92,9 @@ class PoliticiansPipeline(object):
 
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
 
+            credentials, project_id = google.auth.default()
+            print(project_id)
+               
             publisher = pubsub.PublisherClient()
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
