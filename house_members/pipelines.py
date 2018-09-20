@@ -94,6 +94,7 @@ class PoliticiansPipeline(object):
 
             credentials, project_id = google.auth.default()
             print(project_id)
+            print(credentials)
                
             publisher = pubsub.PublisherClient()
           
