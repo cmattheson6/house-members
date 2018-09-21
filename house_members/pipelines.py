@@ -107,7 +107,8 @@ class PoliticiansPipeline(object):
                               first_name = item['first_name'],
                               last_name = item['last_name'],
                               party = item['party'],
-                              state = item['state'])
+                              state = item['state'],
+                              district = item['district'])
             os.remove(path)
 
 # class HouseMembersPipeline(object):
