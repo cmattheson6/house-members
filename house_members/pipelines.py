@@ -74,6 +74,7 @@ class PoliticiansPipeline(object):
                              "token_uri": spider.settings.get('token_uri'),
                              "type": spider.settings.get('account_type')
                  }
+            cred_dict['private_key'] = cred_dict['private_key'].replace('\\n', '\n')
             print(cred_dict)
 #             cred_json = json.dumps(cred_dict)
                
