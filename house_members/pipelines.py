@@ -100,7 +100,7 @@ class PoliticiansPipeline(object):
             
             credentials = service_account.Credentials.from_service_account_info(cred_dict)
 #             print(os.path.exists(path))
-            publisher = pubsub.PublisherClient()
+            publisher = pubsub.PublisherClient(credentials = credentials)
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
