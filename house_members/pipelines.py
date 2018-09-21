@@ -75,29 +75,30 @@ class PoliticiansPipeline(object):
                              "type": spider.settings.get('account_type')
                  }
             print(cred_dict)
-            cred_json = json.dumps(cred_dict)
+#             cred_json = json.dumps(cred_dict)
                
                
             # Create a temporary file here
-            fd, path = tempfile.mkstemp(suffix='.json')
-            print(path)
+#             fd, path = tempfile.mkstemp(suffix='.json')
+#             print(path)
 
-            # Then use a 'with open' statement as shown in the stackoverflow comments
-            with os.fdopen(fd, 'w') as tmp:
-                json.dump(cred_dict, tmp)
-                tmp.close()
-            # # Add in the json dump phrase with the right file location
-            # # figure out how to properly add the file to either the application credentials or explicit in the call
-            # # make sure to delete the temporary file
+#             # Then use a 'with open' statement as shown in the stackoverflow comments
+#             with os.fdopen(fd, 'w') as tmp:
+#                 json.dump(cred_dict, tmp)
+#                 tmp.close()
+#             # # Add in the json dump phrase with the right file location
+#             # # figure out how to properly add the file to either the application credentials or explicit in the call
+#             # # make sure to delete the temporary file
 
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
+#             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
 
-            print(os.path.exists(path))
-            credentials, project_id = google.auth.default()
-            print(project_id)
-            print(credentials)
-             
-            print(os.path.exists(path))
+#             print(os.path.exists(path))
+#             credentials, project_id = google.auth.default()
+#             print(project_id)
+#             print(credentials)
+            
+            credentials = service_account.Credentials.from_service_account_info(cred_dict)
+#             print(os.path.exists(path))
             publisher = pubsub.PublisherClient()
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
@@ -109,7 +110,7 @@ class PoliticiansPipeline(object):
                               party = item['party'],
                               state = item['state'],
                               district = item['district'])
-            os.remove(path)
+#             os.remove(path)
 
 # class HouseMembersPipeline(object):
 # #     def open_spider(self, spider):
