@@ -100,17 +100,21 @@ class PoliticiansPipeline(object):
             
             credentials = service_account.Credentials.from_service_account_info(cred_dict)
 #             print(os.path.exists(path))
+            print("I haven't set up the client yet, but I built the credentials!")
             publisher = pubsub.PublisherClient(credentials = credentials)
+            print("The client was set up!")
           
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
                  topic='house_pols')
+            print("The topic was built!")
             publisher.publish(topic, b'This is a representative in the House.', 
                               first_name = item['first_name'],
                               last_name = item['last_name'],
                               party = item['party'],
                               state = item['state'],
                               district = item['district'])
+            print("We published! WOOOO!")
 #             os.remove(path)
 
 # class HouseMembersPipeline(object):
