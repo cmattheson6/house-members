@@ -76,7 +76,6 @@ class PoliticiansPipeline(object):
                  }
             cred_dict['private_key'] = cred_dict['private_key'].replace('\\n', '\n')
             print(cred_dict)
-            return item;
 #             cred_json = json.dumps(cred_dict)
                
                
@@ -99,30 +98,31 @@ class PoliticiansPipeline(object):
 #             print(project_id)
 #             print(credentials)
             
-#             credentials = service_account.Credentials.from_service_account_info(cred_dict)
-#             print(credentials)
-# #             print(os.path.exists(path))
-#             print("I haven't set up the client yet, but I built the credentials!")
-#             publisher = pubsub.PublisherClient(credentials = credentials)
-#             print(publisher)
-#             print("The client was set up!")
+            credentials = service_account.Credentials.from_service_account_info(cred_dict)
+            print(credentials)
+#             print(os.path.exists(path))
+            print("I haven't set up the client yet, but I built the credentials!")
+            publisher = pubsub.PublisherClient(credentials = credentials)
+            print(publisher)
+            print("The client was set up!")
           
-#             topic = 'projects/{project_id}/topics/{topic}'.format(
-#                  project_id='politics-data-tracker-1',
-#                  topic='house_pols')
-#             project_id = 'politics-data-tracker-1'
-#             topic_name = 'house_pols'
-#             topic_path = publisher.topic_path(project_id, topic_name)
-#             data = u'This is a representative in the House.'
-#             data = data.encode('utf-8')
-#             print("The topic was built!")
-#             publisher.publish(topic_path, data=data,
-#                               first_name = item['first_name'],
-#                               last_name = item['last_name'],
-#                               party = item['party'],
-#                               state = item['state'],
-#                               district = item['district'])
-#             print("We published! WOOOO!")
+            topic = 'projects/{project_id}/topics/{topic}'.format(
+                 project_id='politics-data-tracker-1',
+                 topic='house_pols')
+            project_id = 'politics-data-tracker-1'
+            topic_name = 'house_pols'
+            topic_path = publisher.topic_path(project_id, topic_name)
+            data = u'This is a representative in the House.'
+            data = data.encode('utf-8')
+            print("The topic was built!")
+            publisher.publish(topic_path, data=data,
+                              first_name = item['first_name'],
+                              last_name = item['last_name'],
+                              party = item['party'],
+                              state = item['state'],
+                              district = item['district'])
+            print("We published! WOOOO!")
+            return item;
 #             os.remove(path)
 
 # class HouseMembersPipeline(object):
