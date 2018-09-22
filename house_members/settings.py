@@ -10,10 +10,10 @@ from scrapy.settings.default_settings import CONCURRENT_ITEMS
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'house_pols'
+BOT_NAME = 'house_members'
 
-SPIDER_MODULES = ['house_pols.spiders']
-NEWSPIDER_MODULE = 'house_pols.spiders'
+SPIDER_MODULES = ['house_members.spiders']
+NEWSPIDER_MODULE = 'house_members.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
