@@ -25,8 +25,8 @@ import google.auth
 date_today = date.today()
 
 class PoliticiansPipeline(object):
-     def open_spider(self, spider):
-          pass
+#      def open_spider(self, spider):
+#           pass
 
 #          hostname = 'localhost'
 #          username = 'postgres'
@@ -122,6 +122,7 @@ class PoliticiansPipeline(object):
 #                               state = item['state'],
 #                               district = item['district'])
 #             print("We published! WOOOO!")
+              return item;
 #             os.remove(path)
 
 # class HouseMembersPipeline(object):
