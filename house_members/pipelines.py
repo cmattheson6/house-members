@@ -107,8 +107,13 @@ class PoliticiansPipeline(object):
             topic = 'projects/{project_id}/topics/{topic}'.format(
                  project_id='politics-data-tracker-1',
                  topic='house_pols')
+            project_id = 'politics-data-tracker-1'
+            topic_name = 'house_pols'
+            topic_path = publisher.topic_path(project_id, topic_name)
+            data = u'This is a representative in the House.'
+            data = data.encode('utf-8')
             print("The topic was built!")
-            publisher.publish(topic, b'This is a representative in the House.', 
+            publisher.publish(topic_path, data=data, 
                               first_name = item['first_name'],
                               last_name = item['last_name'],
                               party = item['party'],
