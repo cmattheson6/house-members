@@ -76,6 +76,7 @@ class PoliticiansPipeline(object):
                  }
             cred_dict['private_key'] = cred_dict['private_key'].replace('\\n', '\n')
             print(cred_dict)
+            return item;
 #             cred_json = json.dumps(cred_dict)
                
                
@@ -122,7 +123,6 @@ class PoliticiansPipeline(object):
 #                               state = item['state'],
 #                               district = item['district'])
 #             print("We published! WOOOO!")
-              return item;
 #             os.remove(path)
 
 # class HouseMembersPipeline(object):
