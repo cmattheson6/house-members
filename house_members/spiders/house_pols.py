@@ -70,14 +70,21 @@ class HousePolsSpider(scrapy.Spider):
                 district = rep.xpath(".//td/text()").extract()[0]
                 district = district.strip(' \t\n\r')
                 
+                from house_members.items import HouseMembersItem
                 # combines all data pieces of a representative into a dictionary
-                rep_dict = {
-                    'first_name': first_name,
-                    'last_name': last_name,
-                    'party': party,
-                    'state': state,
-                    'district': district}
-                pol_item = PoliticiansItem(rep_dict)
-                print(pol_item)
+#                 rep_dict = {
+#                     'first_name': first_name,
+#                     'last_name': last_name,
+#                     'party': party,
+#                     'state': state,
+#                     'district': district
+#                 }
+                house_item = HouseMembersItem()
+                house_item['first_name'] = first_name
+                house_item['last_name'] = last_name
+                house_item['party'] = party
+                house_item['state'] = state
+                house_item['district'] = district
+                print(house_item)
                 # yields the dictionary, which will then get uploaded to database in pipeline
-                yield pol_item;
+                yield house_item;
