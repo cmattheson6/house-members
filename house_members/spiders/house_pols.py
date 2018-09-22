@@ -77,6 +77,7 @@ class HousePolsSpider(scrapy.Spider):
                     'party': party,
                     'state': state,
                     'district': district}
-                
+                pol_item = PoliticiansItem(rep_dict)
+                print(pol_item)
                 # yields the dictionary, which will then get uploaded to database in pipeline
-                yield rep_dict;
+                yield pol_item;
