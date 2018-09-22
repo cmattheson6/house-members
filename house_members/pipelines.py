@@ -113,12 +113,12 @@ class PoliticiansPipeline(object):
             data = u'This is a representative in the House.'
             data = data.encode('utf-8')
             print("The topic was built!")
-            publisher.publish(topic_path, data=data, 
-                              first_name = item['first_name'],
-                              last_name = item['last_name'],
-                              party = item['party'],
-                              state = item['state'],
-                              district = item['district'])
+            publisher.publish(topic_path, data=data)
+#                               first_name = item['first_name'],
+#                               last_name = item['last_name'],
+#                               party = item['party'],
+#                               state = item['state'],
+#                               district = item['district'])
             print("We published! WOOOO!")
 #             os.remove(path)
 
