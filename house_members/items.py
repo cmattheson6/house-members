@@ -8,14 +8,14 @@
 import scrapy
 
 
-class HouseMembersItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    first_name = scrapy.Field()
-    last_name = scrapy.Field()
-    party = scrapy.Field()
-    state = scrapy.Field()
-    district = scrapy.Field()
+# class HouseMembersItem(scrapy.Item):
+#     # define the fields for your item here like:
+#     # name = scrapy.Field()
+#     first_name = scrapy.Field()
+#     last_name = scrapy.Field()
+#     party = scrapy.Field()
+#     state = scrapy.Field()
+#     district = scrapy.Field()
 
 class PoliticiansItem(scrapy.Item):
     # define the fields for your item here like:
