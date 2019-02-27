@@ -1,226 +1,57 @@
-# -*- coding: utf-8 -*-
+"""
+This pipeline will upload all items from the spiders to the proper Pub/Sub topic.
+The rest of the processing will take place in Dataflow.
+"""
 
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-# import necessary modules
-# import psycopg2
-import datetime
-from datetime import date
-import time
 from google.cloud import pubsub
 from google.oauth2 import service_account
-import subprocess
-import scrapy
-import scrapy.crawler
-from scrapy.utils.project import get_project_settings
-import json
-import os
-import tempfile
-import google.auth
-
-# set today's date
-date_today = date.today()
+import logging
 
 class PoliticiansPipeline(object):
-#      def open_spider(self, spider):
-#           pass
+            
+    def process_item(self, item, spider):
+        """We need to establish a an authorized connection to Google Cloud in order to upload to Google Pub/Sub.
+        In order to host the spiders on Github, the service account credentials are housed on the Scrapy platform
+        and dynamically created in the script."""
 
-#          hostname = 'localhost'
-#          username = 'postgres'
-#          password = 'postgres'
-#          database = 'politics'
-#          self.conn = psycopg2.connect(
-#              host = hostname,
-#              user = username,
-#              password = password,
-#              dbname = database)
-#          self.cur = self.conn.cursor()
-            
-#      def close_spider(self, spider):
-#          self.cur.close()
-#          self.conn.close()
-            
-     def process_item(self, item, spider):
-#          select_query = """select first_name, last_name, party, state from politicians"""
-#          self.cur.execute(select_query)
-#          politicians_list = list(self.cur)
-#          pol_check_tuple = (item['first_name'], item['last_name'], item['party'], item['state'])
-            
-#          insert_query = """insert into politicians (first_name, last_name, party, state)
-#              values (%s, %s, %s, %s)"""
-#          pol_packet = (item['first_name'], item['last_name'], item['party'], item['state'])
-                    
-#          if pol_check_tuple in politicians_list:
-#              return item
-#          else:
-#              self.cur.execute(insert_query, vars = pol_packet)
-#              self.conn.commit()
-#              return item
-#           pass
-#             def doubleQString(x):
-#                  return "{0}".format(x);
-            cred_dict = {
-                             "auth_provider_x509_cert_url": spider.settings.get('auth_provider_x509_cert_url'),
-                             "auth_uri": spider.settings.get('auth_uri'),
-                             "client_email": spider.settings.get('client_email'),
-                             "client_id": spider.settings.get('client_id'),
-                             "client_x509_cert_url": spider.settings.get('client_x509_cert_url'),
-                             "private_key": spider.settings.get('private_key'),
-                             "private_key_id": spider.settings.get('private_key_id'),
-                             "project_id": spider.settings.get('project_id'),
-                             "token_uri": spider.settings.get('token_uri'),
-                             "type": spider.settings.get('account_type')
-                 }
-            cred_dict['private_key'] = cred_dict['private_key'].replace('\\n', '\n')
-            print(cred_dict)
-#             cred_json = json.dumps(cred_dict)
+        # Pull all of the credential info from the Scrapy platform into a dictionary.
+        cred_dict = {
+            "auth_provider_x509_cert_url": spider.settings.get('auth_provider_x509_cert_url'),
+            "auth_uri": spider.settings.get('auth_uri'),
+            "client_email": spider.settings.get('client_email'),
+            "client_id": spider.settings.get('client_id'),
+            "client_x509_cert_url": spider.settings.get('client_x509_cert_url'),
+            "private_key": spider.settings.get('private_key'),
+            "private_key_id": spider.settings.get('private_key_id'),
+            "project_id": spider.settings.get('project_id'),
+            "token_uri": spider.settings.get('token_uri'),
+            "type": spider.settings.get('account_type')
+        }
+        logging.info('Credentials downloaded from Scrapy server.')
+        cred_dict['private_key'] = cred_dict['private_key'].replace('\\n', '\n')
                
-               
-            # Create a temporary file here
-#             fd, path = tempfile.mkstemp(suffix='.json')
-#             print(path)
 
-#             # Then use a 'with open' statement as shown in the stackoverflow comments
-#             with os.fdopen(fd, 'w') as tmp:
-#                 json.dump(cred_dict, tmp)
-#                 tmp.close()
-#             # # Add in the json dump phrase with the right file location
-#             # # figure out how to properly add the file to either the application credentials or explicit in the call
-#             # # make sure to delete the temporary file
+        # Build a Credentials object from the above dictionary. This will properly allow access as part of a
+        # Google Cloud Client.
+        logging.info('Credentials object created.')
+        credentials = service_account.Credentials.from_service_account_info(cred_dict)
 
-#             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path
+        # Create Publisher client.
+        publisher = pubsub.PublisherClient(credentials = credentials)
+        logging.info('Publisher Client created.')
 
-#             print(os.path.exists(path))
-#             credentials, project_id = google.auth.default()
-#             print(project_id)
-#             print(credentials)
-            
-            credentials = service_account.Credentials.from_service_account_info(cred_dict)
-            print(credentials)
-#             print(os.path.exists(path))
-            print("I haven't set up the client yet, but I built the credentials!")
-            publisher = pubsub.PublisherClient(credentials = credentials)
-            print(publisher)
-            print("The client was set up!")
-          
-            topic = 'projects/{project_id}/topics/{topic}'.format(
-                 project_id='politics-data-tracker-1',
-                 topic='house_pols')
-            project_id = 'politics-data-tracker-1'
-            topic_name = 'house_pols'
-            topic_path = publisher.topic_path(project_id, topic_name)
-            data = u'This is a representative in the House.'
-            data = data.encode('utf-8')
-            print("The topic was built!")
-            publisher.publish(topic_path, data=data,
-                              first_name = item['first_name'],
-                              last_name = item['last_name'],
-                              party = item['party'],
-                              state = item['state'],
-                              district = item['district'])
-            print("We published! WOOOO!")
-            return item;
-#             os.remove(path)
-
-# class HouseMembersPipeline(object):
-# #     def open_spider(self, spider):
-# #         hostname = 'localhost'
-# #         username = 'postgres'
-# #         password = 'postgres'
-# #         database = 'politics'
-# #         self.conn = psycopg2.connect(
-# #             host = hostname,
-# #             user = username,
-# #             password = password,
-# #             dbname = database)
-# #         self.cur = self.conn.cursor()
-    
-# #     def close_spider(self, spider):
-# #         self.cur.close()
-# #         self.conn.close()
-   
-#     def process_item(self, item, spider):
-# #         house_member = ()
-        
-# #         select_query = """select first_name, last_name, party, state from house"""
-# #         self.cur.execute(select_query)
-# #         rep_tuple_list = list(self.cur)
-         
-# #         select_query = """select first_name, last_name, party, state from politicians"""
-# #         self.cur.execute(select_query)
-# #         pol_tuple_list = list(self.cur)
-            
-# #         select_query = """select * from house"""
-# #         self.cur.execute(select_query)
-# #         all_reps_list = list(self.cur) # eventually change this to Pandas data frame
-            
-# #         select_query = """select * from politicians"""
-# #         self.cur.execute(select_query)
-# #         all_pols_list = list(self.cur) # eventually change this to Pandas data frame
-            
-# #         select_all_query = """select id from house"""
-# #         self.cur.execute(select_query)
-# #         house_reps_list = list(self.cur) # eventually change this to Pandas data frame
-          
-
-#         pol_tuple = (item['first_name'], item['last_name'], item['party'], item['state'])
-        
-# #         insert_query = """insert into house (id, first_name, last_name, party, 
-# #             state, district, start_date, end_date, tenure_num)
-# #             values (%s, %s, %s, %s, %s, %s, %s, %s, %s)""" 
-# #         update_query = """update house
-# #                      set end_date = %s
-# #                      where id = %s"""
-      
-#         pol_id = all_pols_list[pol_tuple_list.index(pol_tuple)][0]
-#         house_pol_packet = (pol_id, 
-#                             item['first_name'], 
-#                             item['last_name'], 
-#                             item['party'],
-#                             item['state'],
-#                             item['district'],
-#                             date_today,
-#                             date_today,
-#                             house_reps_list.count(pol_id)+1)
-              
-#         if (pol_tuple in rep_tuple_list
-#             ###fix this in the morning
-#             and date_today - all_reps_list[rep_tuple_list.index(pol_tuple)][7] 
-#             # the previous line needs to change as it will not be functional past two iterations
-#             <= datetime.timedelta(days = 30)):
-# #             self.cur.execute(update_query, vars = [date_today, pol_id])
-# #             self.conn.commit()
-#             return item
-#         elif (pol_tuple in rep_tuple_list 
-#             and date_today - all_reps_list[rep_tuple_list.index(pol_tuple)][7] 
-#             # the previous line needs to change as it will not be functional past two iterations
-#             > datetime.timedelta(days = 30)):
-# #             self.cur.execute(insert_query, vars = house_pol_packet)
-# #             self.conn.commit()
-#             return item
-#         else:
-# #             self.cur.execute(insert_query, vars = house_pol_packet)
-# #             self.conn.commit()
-#             return item
-        
-#         # This is the trial code from the separate pipeline
-
-# #         select_query = """select first_name, last_name, party, state from politicians"""
-# #         self.cur.execute(select_query)
-# #         politicians_list = list(self.cur)
-# #         pol_check_tuple = (item['first_name'], item['last_name'], item['party'], item['state'])
-# #            
-# #         insert_query = """insert into politicians (first_name, last_name, party, state)
-# #             values (%s, %s, %s, %s)"""
-# #         pol_packet = (item['first_name'], item['last_name'], item['party'], item['state'])
-# #   
-# #         if pol_check_tuple in politicians_list:
-# #              pass
-# #         else:
-# #              self.cur.execute(insert_query, vars = pol_packet)
-# #              self.conn.commit()
-# #              return item
-       
+        # Set location of proper publisher topic
+        project_id = 'politics-data-tracker-1'
+        topic_name = 'house_pols'
+        topic_path = publisher.topic_path(project_id, topic_name)
+        data = u'This is a representative in the House.' #Consider how to better use this.
+        data = data.encode('utf-8')
+        publisher.publish(topic_path, data=data,
+                          first_name = item['first_name'],
+                          last_name = item['last_name'],
+                          party = item['party'],
+                          state = item['state'],
+                          district = item['district'])
+        logging.info('Published item: {0}'.format(item))
+        yield item;
