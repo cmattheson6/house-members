@@ -11,10 +11,12 @@ from house_members.items import HouseMembersItem
 class HousePolsSpider(scrapy.Spider):
     name = "house_pols"
 
+    # Sends a request to the senate page to pull current page's contents.
     def start_requests(self):
         start_url = "https://www.house.gov/representatives"
         yield scrapy.Request(url = start_url, callback = self.parse)
-    
+
+    # Parse function pulls the needed data on Senators out of the page.
     def parse(self, response):
         
         # finds the path to the table that contains a single state's representatives
@@ -24,15 +26,15 @@ class HousePolsSpider(scrapy.Spider):
                 continue
             else: 
                 pass
-            # pulls the state of all representatives in this group; will be added back in
+            # pulls the state of all representatives in this group; will be added back in.
             state = region.xpath(".//caption/text()").extract_first()
             state = state.strip(' \t\n\r')
             
-            # establishes the path to each representative of the one state
+            # establishes the path to each representative of the one state.
             for rep in region.xpath(".//tbody/tr"):
                 full_name = rep.xpath(".//td/a/text()").extract_first()
                 
-                # pulls the first and last name of the representative
+                # pulls the first and last name of the representative.
                 if "," in full_name:
                     first_name = full_name.split(',')[1]
                     last_name = full_name.split(',')[0]
@@ -47,11 +49,11 @@ class HousePolsSpider(scrapy.Spider):
                 party = rep.xpath(".//td/text()").extract()[2]
                 party = party.strip(' \t\n\r')
                 
-                # pulls the district of the given representative
+                # pulls the district of the given representative.
                 district = rep.xpath(".//td/text()").extract()[0]
                 district = district.strip(' \t\n\r')
 
-                # Combine all parts of the representative into an Item for proper upload
+                # Combine all parts of the representative into an Item for proper upload.
                 house_item = HouseMembersItem()
                 house_item['first_name'] = first_name
                 house_item['last_name'] = last_name
@@ -59,5 +61,5 @@ class HousePolsSpider(scrapy.Spider):
                 house_item['state'] = state
                 house_item['district'] = district
                 logging.info('New Rep: {0}'.format(house_item))
-                # yields the Item, which will then get sent to the Scrapy pipeline to send to Pub/Sub
+                # yields the Item, which will then get sent to the Scrapy pipeline to send to Pub/Sub.
                 yield house_item;

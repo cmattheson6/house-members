@@ -34,8 +34,8 @@ class PoliticiansPipeline(object):
 
         # Build a Credentials object from the above dictionary. This will properly allow access as part of a
         # Google Cloud Client.
-        logging.info('Credentials object created.')
         credentials = service_account.Credentials.from_service_account_info(cred_dict)
+        logging.info('Credentials object created.')
 
         # Create Publisher client.
         publisher = pubsub.PublisherClient(credentials = credentials)
