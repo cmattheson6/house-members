@@ -54,4 +54,4 @@ class PoliticiansPipeline(object):
                           state = item['state'],
                           district = item['district'])
         logging.info('Published item: {0}'.format(item))
-        yield item
+        return item
